@@ -10,7 +10,7 @@ import subprocess
 
 
 # replace here with your mongodb url 
-uri = "mongodb+srv://ivanavila:admin@cluster0.hdko7y8.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://ivanavila:<password>@cluster0.hdko7y8.mongodb.net/?retryWrites=true&w=majority"
 
 
 # Create a new client and connect to the server
@@ -26,7 +26,7 @@ uri = "mongodb+srv://ivanavila:admin@cluster0.hdko7y8.mongodb.net/?retryWrites=t
 # Connect to MongoDB and pizza_data database
 
 try:
-    client = MongoClient(uri, server_api=ServerApi('1'))
+    client = MongoClient(uri)
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
