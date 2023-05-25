@@ -56,14 +56,16 @@ for msg in consumer:
     except:
        print("Could not insert into MongoDB")
     
- # Create memes_sumary and insert groups into MongoDB
+# Create memes_sumary and insert groups into MongoDB
 try:
-    agg_result= db.memes_info.aggregate
+    agg_result= db.memes_info.aggregate(
     [{
         "$group" :
-        { "_id"} : "$name",
+        { "_id" : "$name",
            "n" : {"$sum": 1}
-    }]
+
+        }}
+    ])
     db.memes_summary.delete_many({})
     for i in agg_result:
         print (i)
@@ -73,4 +75,5 @@ try:
     except Exception as e:
         print(f'group by caught {type(e)}')
         print(e)
+
 
