@@ -10,7 +10,7 @@ import subprocess
 
 
 # replace here with your mongodb url 
-uri = "mongodb+srv://ivanavila:admin@cluster0.hdko7y8.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://ivanavila:admin@cluster0.dvrrxsr.mongodb.net/?retryWrites=true&w=majority"
 
 
 # Create a new client and connect to the server
@@ -26,7 +26,7 @@ uri = "mongodb+srv://ivanavila:admin@cluster0.hdko7y8.mongodb.net/?retryWrites=t
 # Connect to MongoDB and pizza_data database
 
 try:
-    client = MongoClient(uri)
+    client = MongoClient(uri, server_api=ServerApi('1'))
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
@@ -36,7 +36,7 @@ except:
     print("Could not connect to MongoDB")
 
 consumer = KafkaConsumer('test',bootstrap_servers=[
-     'my-kafka-0.my-kafka-headless.v2-ivanavila1224.svc.cluster.local:9092' 
+     'my-kafka-0.my-kafka-headless.v2-ivanavila1224.svc.cluster.local:9092'
     ])
 # Parse received data from Kafka
 for msg in consumer:
@@ -55,8 +55,8 @@ for msg in consumer:
 
     except:
        print("Could not insert into MongoDB")
-    
-# Create memes_sumary and insert groups into MongoDB
+
+# Create memes_summary and insert groups into MongoDB
 try:
     agg_result= db.memes_info.aggregate(
     [{
@@ -73,7 +73,10 @@ try:
         print("Summary inserted with record ids", summary_id)
 
     except Exception as e:
-        print(f'group by caught {type(e)}')
+        print(f'group by caught {type(e)}: ')
         print(e)
+
+
+
 
 
