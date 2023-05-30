@@ -70,7 +70,7 @@ try:
         summary_id = db.memes_summary.insert_one(i)
         print("Summary inserted with record ids", summary_id)
 
- except Exception as e:
+except Exception as e:
     print(f'group by caught {type(e)}')
     print(e)
 
